@@ -6,10 +6,16 @@
  * Time: 16:31
  */
 
-function __autoload($class)
+function my_app_autoload($class)
 {
-    require __DIR__.'\\'.str_replace('\\', '/', $class).'.php';
+    include __DIR__ . '\\' . str_replace('\\', '/', $class) . '.php';
 }
+
+spl_autoload_register('my_app_autoload');
+
+spl_autoload_register(function ($class) {
+    include __DIR__ . '\\' . str_replace(['\\', 'App'], ['/', 'lib'], $class) . '.php';
+});
 
 
 function dump($var, $die = false, $all = false, $need_return = false)
@@ -17,21 +23,17 @@ function dump($var, $die = false, $all = false, $need_return = false)
     global $USER;
 
 
-        $result = '<pre>'.print_r($var, true).'</pre><br>';
+    $result = '<pre>' . print_r($var, true) . '</pre><br>';
 
     $debug = debug_backtrace(false); // В ознакомительных целях потом можео попробовать с true
-    var_dump('File: '.$debug[0]['file'].'.Line: '.$debug[0]['line']);
-    if($need_return)
-    {
+    var_dump('File: ' . $debug[0]['file'] . '.Line: ' . $debug[0]['line']);
+    if ($need_return) {
         return $result;
-    }
-    else
-    {
+    } else {
         echo $result;
     }
 
-    if($die)
-    {
+    if ($die) {
         die;
     }
 }

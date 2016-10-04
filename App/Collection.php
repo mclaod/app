@@ -9,8 +9,10 @@
 namespace App;
 
 
+use Iterator;
+
 class Collection
-implements \ArrayAccess, \Iterator
+implements \ArrayAccess, Iterator1
 {
     use TCollection;
 }

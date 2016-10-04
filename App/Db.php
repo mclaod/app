@@ -21,10 +21,10 @@ class Db
 
     }
     
-    public function execute($sql)
+    public function execute($sql, $parameters)
     {
         $sth = $this->dbh->prepare($sql);
-        $res = $sth->execute();
+        $res = $sth->execute($parameters);
         return $res;
     }
 
@@ -37,7 +37,11 @@ class Db
             return $sth->fetchAll(\PDO::FETCH_CLASS, $class);
         }
         return [];
+    }
 
+    public function lastInsertId()
+    {
+        return $this->dbh->lastInsertId();
     }
 
 }

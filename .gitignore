@@ -2,3 +2,4 @@
 .gitignore
 .idea/dataSources.local.xml
 .idea/workspace.xml
+/vendor/
